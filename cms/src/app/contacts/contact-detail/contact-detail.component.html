@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-xs-6">
+        <h3>{{ contact?.name || "Your Name Here" }}</h3>
+        <img class="img-responsive" [src]="contact?.imageUrl || 'assets/images/mexiduck.png'" alt="{{ contact?.name }} Image"/>
+      </div>
+      <div class="col-xs-6 text-right">
+        <button type="button" class="btn btn-primary">Edit</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <p><strong>Email:</strong> {{ contact?.email || "No Email"}}</p>
+    <p><strong>Phone:</strong> {{ contact?.phone || "No Phone" }}</p>
+  </div>
+</div>
+
+
