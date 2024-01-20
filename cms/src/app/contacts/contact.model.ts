@@ -8,5 +8,5 @@ export class Contact {
     public phone: string,
     public imageUrl: string,
     group: Contact[]
-  ) {}
+  ) {this.group = group}
 }
