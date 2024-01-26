@@ -6,12 +6,8 @@
       <div class="clearfix"></div>
 
     </div>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let contact of contacts">
-        <div class="lead">{{ contact.name }}</div>
-        <img class="img-responsive pull-right" src="{{contact.imageUrl}}" alt="{{ contact.name }} Image">
-        <div class="clearfix"></div>
-      </li>
-    </ul>
+    <cms-contact-item
+    *ngFor="let contact of contacts"
+    [contact]="contact" (click)="onSelected(contact)"></cms-contact-item>
   </div>
 </div>
