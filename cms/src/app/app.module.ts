@@ -16,6 +16,8 @@ import { MessageItemComponent } from './messages/message-item/message-item.compo
 import { MessageEditComponent } from './messages/message-edit/message-edit.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { CmsDropdownDirective } from './cms-dropdown.directive';
+import { AppRoutingModule } from './app-routing.module';
+import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,12 @@ import { CmsDropdownDirective } from './cms-dropdown.directive';
     MessageItemComponent,
     MessageEditComponent,
     MessageListComponent,
-    CmsDropdownDirective
+    CmsDropdownDirective,
+    DocumentEditComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

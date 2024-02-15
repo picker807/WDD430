@@ -13,9 +13,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li [ngClass]="{'active': selectedFeature === 'documents'}"><a href="#" (click)="onSelected('documents')">Documents</a></li>
-        <li [ngClass]="{'active': selectedFeature === 'messages'}"><a href="#" (click)="onSelected('messages')">Messages</a></li>
-        <li [ngClass]="{'active': selectedFeature === 'contacts'}"><a href="#" (click)="onSelected('contacts')">Contacts</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/documents']" >Documents</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/messages']" >Messages</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/contacts']" >Contacts</a></li>
       </ul>
      
       <ul class="nav navbar-nav navbar-right">

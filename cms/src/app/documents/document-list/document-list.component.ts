@@ -12,10 +12,6 @@ export class DocumentListComponent {
 
   constructor(private documentService: DocumentService) {}
 
-  onSelectedDocument(document: Document){
-    this.documentService.documentSelectedEvent.emit(document);
-  }
-
   ngOnInit(): void {
     this.documents = this.documentService.getDocuments();
   }
