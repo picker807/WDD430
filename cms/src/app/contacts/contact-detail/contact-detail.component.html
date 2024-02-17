@@ -6,8 +6,8 @@
         <img class="img-responsive" [src]="contact?.imageUrl || 'assets/images/mexiduck.png'" alt="{{ contact?.name }} Image"/>
       </div>
       <div class="col-xs-6 text-right">
-        <button type="button" class="btn btn-primary">Edit</button>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <a type="button" class="btn btn-primary" [routerLink]="['edit']" >Edit</a>
+        <a type="button" class="btn btn-danger" [routerLink]="[contact.id]" (click)="onDelete()">Delete</a>
       </div>
     </div>
   </div>

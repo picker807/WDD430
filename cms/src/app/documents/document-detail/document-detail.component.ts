@@ -22,14 +22,19 @@ export class DocumentDetailComponent {
 ){}
 
 ngOnInit(): void {
-  this.route.params.subscribe(params => {
-    const id = params['id'];
-    this.document = this.documentService.getDocument(id);
-  });
-  this.nativeWindow = this.windRefService.getNativeWindow();
-}
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      this.document = this.documentService.getDocument(id);
+    });
+    this.nativeWindow = this.windRefService.getNativeWindow();
+  }
 
-onView(): void {
-  this.nativeWindow.open(this.document.url);
+  onView(): void {
+    this.nativeWindow.open(this.document.url);
+  }
+
+  onDelete() {
+    this.documentService.deleteDocument(this.document);
+    this.router.navigate(['/documents']);
 }
 }
