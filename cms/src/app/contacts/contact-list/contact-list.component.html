@@ -5,9 +5,15 @@
       <button type="button" class="btn btn-success pull-right" [routerLink]="['new']" >New Contact</button>
       <div class="clearfix"></div>
 
-    </div>
-    <cms-contact-item
+    </div >
+    <div cdkDropList
+    [cdkDropListData]="contacts">
+    <div 
+    cdkDrag
     *ngFor="let contact of contacts"
-    [contact]="contact"></cms-contact-item>
+    [cdkDragData]="contact">
+      <cms-contact-item [contact]="contact"  ></cms-contact-item>
+    </div>
+    </div>
   </div>
 </div>
