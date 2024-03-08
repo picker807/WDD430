@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Document } from './document.model';
-import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -11,16 +11,42 @@ export class DocumentService {
 documents: Document[] = [];
 maxDocumentId: number;
 documentSelectedEvent = new EventEmitter<Document>();
-//documentChangedEvent = new EventEmitter<Document[]>();
 documentListChangedEvent = new Subject<Document[]>();
+url: string = 'https://cms-picker-default-rtdb.firebaseio.com/documents.json';
 
-  constructor() { 
-    this.documents = MOCKDOCUMENTS;
+  constructor(private http: HttpClient) { 
     this.maxDocumentId = this.getMaxId();
   }
 
-  getDocuments(): Document[]{
-    return this.documents.slice();
+  // Get all documents
+  getDocuments(): void {
+    this.http.get<Document[]>(this.url).subscribe(
+      (documents: Document[]) => {
+        this.documents = documents;
+        this.maxDocumentId = this.getMaxId();
+        this.documents.sort((a: Document, b: Document) => {
+          if (a.name <b.name) {
+            return -1;
+          } else if (a.name > b.name) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        this.documentListChangedEvent.next(this.documents.slice());
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  storeDocuments(): void {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.http.put(this.url, JSON.stringify(this.documents), { headers: headers })
+      .subscribe(() => {
+        this.documentListChangedEvent.next(this.documents.slice());
+      });
   }
 
   getDocument(id: string){
@@ -53,7 +79,7 @@ documentListChangedEvent = new Subject<Document[]>();
     this.documents.push(newDocument);
 
     const documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocuments();
   }
 
   updateDocument(originalDocument: Document, newDocument: Document): void {
@@ -69,7 +95,7 @@ documentListChangedEvent = new Subject<Document[]>();
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
 
-    this.documentListChangedEvent.next(this.documents.slice());
+    this.storeDocuments();
   }
 
   deleteDocument(document: Document): void {
@@ -83,7 +109,7 @@ documentListChangedEvent = new Subject<Document[]>();
     }
 
     this.documents.splice(pos, 1);
-    this.documentListChangedEvent.next(this.documents.slice());
+    this.storeDocuments();
   }
 
 }

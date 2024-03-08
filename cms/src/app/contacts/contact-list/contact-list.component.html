@@ -1,19 +1,31 @@
-<div class="container-fluid">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="list-group-item-heading pull-left">Contacts</h2>
-      <button type="button" class="btn btn-success pull-right" [routerLink]="['new']" >New Contact</button>
-      <div class="clearfix"></div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="container-fluid">
+      <div class="panel panel-default">
+       <div class="panel-heading">
+        <div class="row">
+          <h2 class="list-group-item-heading ">Contacts</h2>
+        </div>
+        <div class="row">
+          <div class="input-group pull-left pad-left-right col-xs-7">
+            <input class="form-contol" placeholder="Enter a search value" #searchBox (keyup)="search(searchBox.value)">
+            <div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
+          </div>
 
-    </div >
+          <button type="button" class="btn btn-success pull-right pad-right-10" [routerLink]="['new']" >New Contact</button>
+          <div class="clearfix"></div>
+
+        </div >
     <div cdkDropList
     [cdkDropListData]="contacts">
     <div 
     cdkDrag
-    *ngFor="let contact of contacts"
+    *ngFor="let contact of contacts | contactsFilter:term"
     [cdkDragData]="contact">
       <cms-contact-item [contact]="contact"  ></cms-contact-item>
     </div>
     </div>
   </div>
+</div>
+</div>
 </div>

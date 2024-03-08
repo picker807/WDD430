@@ -30,6 +30,15 @@ export class ContactEditComponent implements OnInit{
       const id = params['id'];
       if (id === undefined || id === null) {
         this.editMode = false;
+        this.contact = {
+          id: null,
+          isAGroup: false,
+          name: '', 
+          email: '', 
+          phone: '', 
+          imageUrl: '', 
+          group: []
+        };
         return;
       }
       
@@ -47,6 +56,8 @@ export class ContactEditComponent implements OnInit{
       }
     });
   }
+
+  
 
   onDrop(event: CdkDragDrop<Contact[]>) {
     if (event.previousContainer !== event.container) {
