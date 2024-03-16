@@ -1,0 +1,9 @@
+<a href="#" class="list-group-item clearfix" routerLinkActive="active" [routerLink]="[guitar.id]">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ guitar.brand }}</h4>
+    <h5>{{guitar.model}}</h5>
+  </div>
+  <span class="pull-right">
+    <img class="img-responsive" src="{{guitar.imageUrl}}" alt="{{ guitar.model }} Image">
+  </span>
+  </a>

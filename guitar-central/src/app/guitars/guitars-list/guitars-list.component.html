@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="container-fluid">
+      <div class="panel panel-default">
+       <div class="panel-heading">
+        <div class="row">
+          <h2 class="list-group-item-heading ">Inventory</h2>
+        </div>
+        <div class="row">
+          <div class="input-group pull-left pad-left-right col-xs-7">
+            <input class="form-contol" placeholder="Enter a search value" #searchBox (keyup)="search(searchBox.value)">
+            <div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
+          </div>
+
+          <button type="button" class="btn btn-success pull-right pad-right-10" [routerLink]="['new']" >Add Guitar</button>
+          <div class="clearfix"></div>
+
+        </div >
+    <div *ngFor="let guitar of guitars | guitarsFilter:term">
+      <gc-guitar-item [guitar]="guitar"  ></gc-guitar-item>
+    </div>
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "storeName": "Guitar Central New York",
+    "address": "123 Broadway",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10006"
+  },
+  {
+    "id": "2",
+    "storeName": "Guitar Central Los Angeles",
+    "address": "456 Sunset Blvd",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90028"
+  },
+  {
+    "id": "3",
+    "storeName": "Guitar Central Chicago",
+    "address": "789 W Madison St",
+    "city": "Chicago",
+    "state": "IL",
+    "zipCode": "60661"
+  },
+  {
+    "id": "4",
+    "storeName": "Guitar Central Houston",
+    "address": "1011 Westheimer Rd",
+    "city": "Houston",
+    "state": "TX",
+    "zipCode": "77006"
+  },
+  {
+    "id": "5",
+    "storeName": "Guitar Central Phoenix",
+    "address": "1213 N Central Ave",
+    "city": "Phoenix",
+    "state": "AZ",
+    "zipCode": "85004"
+  },
+  {
+    "id": "6",
+    "storeName": "Guitar Central Philadelphia",
+    "address": "1415 Market St",
+    "city": "Philadelphia",
+    "state": "PA",
+    "zipCode": "19102"
+  },
+  {
+    "id": "7",
+    "storeName": "Guitar Central San Antonio",
+    "address": "330 Montana St",
+    "city": "San Antonio",
+    "state": "TX",
+    "zipCode": "78215"
+  },
+  {
+    "id": "8",
+    "storeName": "Guitar Central San Diego",
+    "address": "1819 India St",
+    "city": "San Diego",
+    "state": "CA",
+    "zipCode": "92101"
+  },
+  {
+    "id": "9",
+    "storeName": "Guitar Central Dallas",
+    "address": "2021 Elm St",
+    "city": "Dallas",
+    "state": "TX",
+    "zipCode": "75201"
+  },
+  {
+    "id": "10",
+    "storeName": "Guitar Central Jacksonville",
+    "address": "2223 Main St",
+    "city": "Jacksonville",
+    "state": "FL",
+    "zipCode": "32206"
+  },
+  {
+    "id": "11",
+    "storeName": "Guitar Central San Francisco",
+    "address": "2425 Market St",
+    "city": "San Francisco",
+    "state": "CA",
+    "zipCode": "94114"
+  },
+  {
+    "id": "12",
+    "storeName": "Guitar Central Indianapolis",
+    "address": "2627 EW 86th St",
+    "city": "Indianapolis",
+    "state": "IN",
+    "zipCode": "46240"
+  },
+  {
+    "id": "13",
+    "storeName": "Guitar Central Columbus",
+    "address": "2829 N High St",
+    "city": "Columbus",
+    "state": "OH",
+    "zipCode": "43202"
+  },
+  {
+    "id": "14",
+    "storeName": "Guitar Central Charlotte",
+    "address": "3031 South Blvd",
+    "city": "Charlotte",
+    "state": "NC",
+    "zipCode": "28209"
+  },
+  {
+    "id": "15",
+    "storeName": "Guitar Central Seattle",
+    "address": "3233 1st Ave",
+    "city": "Seattle",
+    "state": "WA",
+    "zipCode": "98121"
+  }
+]
