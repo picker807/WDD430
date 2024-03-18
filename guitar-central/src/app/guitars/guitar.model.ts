@@ -8,6 +8,6 @@ export class Guitar {
     public description: string,
     public category: string,
     public condition: string,
-    public imageUrl: string
+    public image: string
   ){}
 }
