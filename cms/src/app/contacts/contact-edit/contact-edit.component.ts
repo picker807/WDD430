@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ContactService } from '../contact.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+interface ContactWithId extends Contact { _id: string;}
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ContactEditComponent implements OnInit{
   editMode: boolean = false;
   id: string;
   groupContacts: Contact[] = [];
+  groupIds: string[] = [];
   contact: Contact;
 
   constructor(
@@ -42,7 +44,6 @@ export class ContactEditComponent implements OnInit{
         return;
       }
       
-
       this.originalContact = this.contactService.getContact(id);
       if (this.originalContact === undefined || this.originalContact === null) {
         return;
@@ -51,22 +52,29 @@ export class ContactEditComponent implements OnInit{
       this.editMode = true;
       this.contact = JSON.parse(JSON.stringify(this.originalContact));
 
-      if (this.originalContact.group){
-        this.groupContacts = JSON.parse(JSON.stringify(this.originalContact.group))
-      }
+      if (this.originalContact.group && this.originalContact.group.length > 0) {
+        this.groupContacts = [];
+        this.groupIds = this.originalContact.group;
+        this.originalContact.group.forEach(groupId => {
+          const returnedContact = this.contactService.getContactWithObjectId(groupId);
+            if (returnedContact) {
+              this.groupContacts.push(returnedContact);
+            }
+          });
+        }
     });
   }
-
-  
 
   onDrop(event: CdkDragDrop<Contact[]>) {
     if (event.previousContainer !== event.container) {
       const contactCopy = { ...event.item.data };
-      const invalidGroupContact = this.isInvalidContact(contactCopy);
+      const contactWithId = contactCopy as ContactWithId;
+      const invalidGroupContact = this.isInvalidContact(contactWithId._id);
     if (invalidGroupContact){
         return;
     }
       this.groupContacts.push(contactCopy);
+      this.groupIds.push(contactWithId._id);
     }
   }
 
@@ -75,9 +83,8 @@ export class ContactEditComponent implements OnInit{
   }
 
   onSubmit(form: NgForm){
-    console.log(form);
     const value = form.value;
-    const newContact = new Contact("", value.isAGroup, value.name, value.email, value.phone, value.imageUrl, this.groupContacts);
+    const newContact = new Contact("", value.isAGroup, value.name, value.email, value.phone, value.imageUrl, this.groupIds);
 
     if (this.editMode) {
       this.contactService.updateContact(this.originalContact, newContact);
@@ -95,15 +102,18 @@ export class ContactEditComponent implements OnInit{
     this.groupContacts.splice(index, 1);
   }
 
-  isInvalidContact(newContact: Contact) {
-    if (!newContact) {// newContact has no value
+  isInvalidContact(newId: string) {
+    if (!newId) {
       return true;
     }
-    if (this.contact && newContact.id === this.contact.id) {
+    const contactWithId = this.contact as ContactWithId;
+    if (this.contact && newId === contactWithId._id) {
        return true;
     }
     for (let i = 0; i < this.groupContacts.length; i++){
-       if (newContact.id === this.groupContacts[i].id) {
+
+      const contact = this.groupContacts[i] as ContactWithId;
+       if (newId === contact._id) {
          return true;
       }
     }

@@ -9,7 +9,7 @@ export class MessageService {
   messages: Message[] = [];
   messageChangedEvent = new EventEmitter<Message[]>();
   maxMessageId: number;
-  url: string = 'https://cms-picker-default-rtdb.firebaseio.com/messages.json';
+  url: string = 'http://localhost:3000/messages';
   
   constructor(private http: HttpClient) { 
     
@@ -55,9 +55,27 @@ export class MessageService {
     return null;
   }
 
-  addMessage(message: Message){
-    this.messages.push(message);
-    this.storeMessages();
+  addMessage(newMessage: Message): void{
+    if (!newMessage){
+      return;
+    }
+    newMessage.id = '';
+    console.log(newMessage);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    this.http.post<{ message: string, messageData: Message }>(this.url,
+      newMessage,
+      { headers: headers })
+      .subscribe(
+        (responseData) => {
+          console.log(responseData);
+          this.messages.push(responseData.messageData);
+          this.messageChangedEvent.emit(this.messages.slice());
+        },
+        (error) => {
+          console.error("Error at Message Service: ", error);
+        }
+      );
   }
 
   getMaxId(): number {

@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ContactDetailComponent {
   @Input() public contact: Contact | undefined;
+  groupContacts: Contact[] = [];
   
 
   constructor(private contactService: ContactService,
@@ -19,7 +20,23 @@ export class ContactDetailComponent {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const id = params['id'];
-      this.contact = this.contactService.getContact(id);
+      if (id) {
+        this.contact = this.contactService.getContact(id)
+        if (this.contact?.isAGroup && this.contact.group) {
+            this.fetchGroupContacts();
+          }
+      };
+      });
+    }
+    
+
+  fetchGroupContacts(): void {
+    this.groupContacts = [];
+    this.contact.group.forEach(id => {
+    const contactWithId = this.contactService.getContactWithObjectId(id);
+    if (contactWithId) {
+      this.groupContacts.push(contactWithId);
+    }
     });
   }
 

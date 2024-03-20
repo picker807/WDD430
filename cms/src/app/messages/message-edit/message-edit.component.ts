@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
 import { Message } from '../message.model';
 import { MessageService } from '../message.service';
+import { ContactService } from '../../contacts/contact.service';
 
 @Component({
   selector: 'cms-message-edit',
@@ -9,7 +10,8 @@ import { MessageService } from '../message.service';
 })
 export class MessageEditComponent {
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService,
+    private contactService: ContactService) {}
 
   currentSender = "Aaron Picker";
   @ViewChild('subject') subjectInput: ElementRef;
@@ -19,7 +21,10 @@ export class MessageEditComponent {
   onSendMessage(){
     const subject = this.subjectInput.nativeElement.value;
     const msgText = this.msgTextInput.nativeElement.value;
-    let message = new Message("1", subject, msgText, "1")
+    const newSender = this.contactService.getContactByName("Aaron Picker");
+    const newSenderId = this.contactService.getObjectId(newSender.id);
+    console.log(newSender, newSenderId);
+    let message = new Message("", subject, msgText, newSenderId)
 
     this.messageService.addMessage(message);
   }

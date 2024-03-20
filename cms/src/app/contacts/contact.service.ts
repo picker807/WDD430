@@ -1,24 +1,25 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Contact } from './contact.model';
-import { MOCKCONTACTS } from './MOCKCONTACTS';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+interface ContactWithId extends Contact { _id: string;}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
   contacts: Contact[] = [];
+  private contactsLoaded = new BehaviorSubject<boolean>(false);
   maxContactId: number;
   contactSelectedEvent: EventEmitter<Contact> = new EventEmitter<Contact>();
   contactListChangedEvent = new Subject<Contact []>();
-  url: string = 'https://cms-picker-default-rtdb.firebaseio.com/contacts.json';
+  url: string = 'http://localhost:3000/contacts';
 
   constructor(private http: HttpClient) { 
-    //this.contacts = MOCKCONTACTS;
-    this.maxContactId = this.getMaxId();
+    //this.maxContactId = this.getMaxId();
   }
 
+  // get all contacts
   getContacts(): void{
     this.http.get<Contact[]>(this.url).subscribe(
       (contacts: Contact[]) => {
@@ -34,12 +35,17 @@ export class ContactService {
           }
         });
         this.contactListChangedEvent.next(this.contacts.slice());
+        console.log(this.contacts);
+        this.contactsLoaded.next(true);
       },
       (error: any) => {
         console.error(error);
       }
     );
+  }
 
+  areContactsLoaded(): Observable<boolean> {
+    return this.contactsLoaded.asObservable();
   }
 
   storeContacts(): void {
@@ -50,10 +56,39 @@ export class ContactService {
       });
   }
 
-  getContact(id: string): Contact | null{
-    for (const contact of this.contacts){
+  getContact(id: string): Contact | null {
+    for (const contact of this.contacts) {
       if (contact.id === id) {
         return contact;
+      }
+    }
+    return null;
+  }
+
+  getContactByName(name: string): Contact | null {
+    for (const contact of this.contacts) {
+      if (contact.name === name) {
+        return contact;
+      }
+    }
+    return null;
+  }
+
+  getContactWithObjectId(id: string): Contact | null {
+    for (const contact of this.contacts) {
+      const contactWithId = contact as ContactWithId;
+      if (contactWithId._id === id) {
+        return contactWithId;
+      }
+    }
+    return null;
+  }
+
+  getObjectId(id: string): string | null {
+    for (const contact of this.contacts) {
+      if (contact.id === id) {
+        const contactWithId = contact as ContactWithId;
+        return contactWithId._id;
       }
     }
     return null;
@@ -74,28 +109,41 @@ export class ContactService {
       if (newContact === undefined || newContact === null) {
         return;
       }
-  
-      this.maxContactId++;
-      newContact.id = this.maxContactId.toString();
-      this.contacts.push(newContact);
-  
-      this.storeContacts();
+      newContact.id = '';
+      const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+      this.http.post<{ message: string, contact: Contact }>(this.url,
+        newContact,
+        { headers: headers })
+        .subscribe(
+          (responseData) => {
+            this.contacts.push(responseData.contact);
+            this.contactListChangedEvent.next(this.contacts.slice());
+          }
+        );
     }
   
     updateContact(originalContact: Contact, newContact: Contact): void {
       if (originalContact === undefined || originalContact === null || newContact === undefined || newContact === null) {
         return;
       }
-  
+      console.log(newContact);
       const pos = this.contacts.indexOf(originalContact);
       if (pos < 0) {
         return;
       }
   
       newContact.id = originalContact.id;
-      this.contacts[pos] = newContact;
-  
-      this.storeContacts();
+      //this.contacts[pos] = newContact;
+      const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    // update database
+    this.http.put(this.url + '/' + originalContact.id,
+      newContact, { headers: headers })
+      .subscribe(
+        (response: Response) => {
+          this.contacts[pos] = newContact;
+          this.contactListChangedEvent.next(this.contacts.slice());
+        });
     }
   
     deleteContact(contact: Contact): void {
@@ -107,8 +155,14 @@ export class ContactService {
       if (pos < 0) {
         return;
       }
-  
-      this.contacts.splice(pos, 1);
-      this.storeContacts();
+      
+      this.http.delete(this.url + '/' + contact.id)
+      .subscribe(
+        (response: Response) => {
+          this.contacts.splice(pos, 1);
+          this.contactListChangedEvent.next(this.contacts.slice());
+        }
+      )
+      
     }
 }

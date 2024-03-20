@@ -12,7 +12,7 @@ documents: Document[] = [];
 maxDocumentId: number;
 documentSelectedEvent = new EventEmitter<Document>();
 documentListChangedEvent = new Subject<Document[]>();
-url: string = 'https://cms-picker-default-rtdb.firebaseio.com/documents.json';
+url: string = 'http://localhost:3000/documents';
 
   constructor(private http: HttpClient) { 
     this.maxDocumentId = this.getMaxId();
@@ -69,17 +69,26 @@ url: string = 'https://cms-picker-default-rtdb.firebaseio.com/documents.json';
     return maxId;
 }
 
-  addDocument(newDocument: Document): void {
-    if (newDocument === undefined || newDocument === null) {
+  addDocument(document: Document): void {
+    if (document === undefined || document === null) {
       return;
     }
+    document.id = '';
 
-    this.maxDocumentId++;
-    newDocument.id = this.maxDocumentId.toString();
-    this.documents.push(newDocument);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-    const documentsListClone = this.documents.slice();
-    this.storeDocuments();
+    this.http.post<{ message: string, document: Document }>(this.url,
+      document,
+      { headers: headers })
+      .subscribe(
+        (responseData) => {
+          this.documents.push(responseData.document);
+          this.documentListChangedEvent.next(this.documents.slice());
+          //this.storeDocuments();
+          //this.sortAndSend();
+        }
+      );
+   
   }
 
   updateDocument(originalDocument: Document, newDocument: Document): void {
@@ -93,9 +102,19 @@ url: string = 'https://cms-picker-default-rtdb.firebaseio.com/documents.json';
     }
 
     newDocument.id = originalDocument.id;
-    this.documents[pos] = newDocument;
+    //newDocument._id = originalDocument._id
 
-    this.storeDocuments();
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    // update database
+    this.http.put(this.url + '/' + originalDocument.id,
+      newDocument, { headers: headers })
+      .subscribe(
+        (response: Response) => {
+          this.documents[pos] = newDocument;
+          this.documentListChangedEvent.next(this.documents.slice());
+        });
+
+    //this.storeDocuments();
   }
 
   deleteDocument(document: Document): void {
@@ -108,8 +127,13 @@ url: string = 'https://cms-picker-default-rtdb.firebaseio.com/documents.json';
       return;
     }
 
-    this.documents.splice(pos, 1);
-    this.storeDocuments();
+    this.http.delete(this.url + '/' + document.id)
+      .subscribe(
+        (response: Response) => {
+          this.documents.splice(pos, 1);
+          this.documentListChangedEvent.next(this.documents.slice());
+        }
+      );
   }
 
 }

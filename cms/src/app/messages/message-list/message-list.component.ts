@@ -20,7 +20,11 @@ export class MessageListComponent {
   }
 
   ngOnInit(): void {
-    this.contactService.getContacts();
+    this.contactService.areContactsLoaded().subscribe(loaded => {
+      if (!loaded) {
+        this.contactService.getContacts();
+      }
+    })  
     this.messageService.getMessages();
     this.messageService.messageChangedEvent.subscribe((messages: Message[]) => {
       this.messages = messages;

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-6">
         <h3>{{ contact?.name || "Your Name Here" }}</h3>
-        <img class="img-responsive" [src]="contact?.imageUrl || 'assets/images/mexiduck.png'" alt="{{ contact?.name }} Image"/>
+        <img class="img-responsive" [src]="contact.imageUrl || 'assets/images/mexiduck.png'" alt="{{ contact?.name }} Image"/>
       </div>
       <div class="col-xs-6 text-right">
         <a type="button" class="btn btn-primary" [routerLink]="['edit']" >Edit</a>
@@ -17,15 +17,15 @@
   </div>
   <div *ngIf="contact.isAGroup">
     <div class="row">
-      <div class="form-group">
+      <div class="form-group pad-left">
         <label for="groupList">Group Contacts:</label>
 
             <div  
             id="groupList" 
             style="min-height: 3rem;">
-              <div *ngFor="let contact of contact.group; let i = index">
+              <div *ngFor="let groupContact of groupContacts; let i = index">
                 <div>
-                  <cms-contact-item class="col-sm-11" [contact]="contact"></cms-contact-item>
+                  <cms-contact-item class="col-sm-11" [contact]="groupContact"></cms-contact-item>
               </div>
               </div>
             </div>

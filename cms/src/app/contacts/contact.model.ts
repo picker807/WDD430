@@ -1,5 +1,5 @@
 export class Contact {
-  public group?: Contact[]
+  public group?: string[]
 
   constructor(
     public id: string,
@@ -8,7 +8,7 @@ export class Contact {
     public email: string,
     public phone: string,
     public imageUrl: string,
-    group: Contact[]
+    group: string[]
     
   ) {this.group = group}
 }
