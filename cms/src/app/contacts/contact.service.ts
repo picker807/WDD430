@@ -16,7 +16,7 @@ export class ContactService {
   url: string = 'http://localhost:3000/contacts';
 
   constructor(private http: HttpClient) { 
-    //this.maxContactId = this.getMaxId();
+  
   }
 
   // get all contacts
@@ -35,7 +35,6 @@ export class ContactService {
           }
         });
         this.contactListChangedEvent.next(this.contacts.slice());
-        console.log(this.contacts);
         this.contactsLoaded.next(true);
       },
       (error: any) => {
@@ -127,14 +126,12 @@ export class ContactService {
       if (originalContact === undefined || originalContact === null || newContact === undefined || newContact === null) {
         return;
       }
-      console.log(newContact);
       const pos = this.contacts.indexOf(originalContact);
       if (pos < 0) {
         return;
       }
   
       newContact.id = originalContact.id;
-      //this.contacts[pos] = newContact;
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
     // update database
     this.http.put(this.url + '/' + originalContact.id,

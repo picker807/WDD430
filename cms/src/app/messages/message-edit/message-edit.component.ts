@@ -23,7 +23,6 @@ export class MessageEditComponent {
     const msgText = this.msgTextInput.nativeElement.value;
     const newSender = this.contactService.getContactByName("Aaron Picker");
     const newSenderId = this.contactService.getObjectId(newSender.id);
-    console.log(newSender, newSenderId);
     let message = new Message("", subject, msgText, newSenderId)
 
     this.messageService.addMessage(message);

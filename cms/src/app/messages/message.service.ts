@@ -60,7 +60,6 @@ export class MessageService {
       return;
     }
     newMessage.id = '';
-    console.log(newMessage);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     this.http.post<{ message: string, messageData: Message }>(this.url,
@@ -68,7 +67,6 @@ export class MessageService {
       { headers: headers })
       .subscribe(
         (responseData) => {
-          console.log(responseData);
           this.messages.push(responseData.messageData);
           this.messageChangedEvent.emit(this.messages.slice());
         },

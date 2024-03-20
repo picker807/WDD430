@@ -84,8 +84,6 @@ url: string = 'http://localhost:3000/documents';
         (responseData) => {
           this.documents.push(responseData.document);
           this.documentListChangedEvent.next(this.documents.slice());
-          //this.storeDocuments();
-          //this.sortAndSend();
         }
       );
    
@@ -102,7 +100,6 @@ url: string = 'http://localhost:3000/documents';
     }
 
     newDocument.id = originalDocument.id;
-    //newDocument._id = originalDocument._id
 
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     // update database

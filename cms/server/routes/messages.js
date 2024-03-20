@@ -25,7 +25,6 @@ router.post('/', async (req, res, next) => {
     msgText: req.body.msgText,
     sender: req.body.sender
   });
-  console.log(message);
 
   const createdMessage = await message.save();
   res.status(201).json({
