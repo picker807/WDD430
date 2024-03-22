@@ -1,0 +1,170 @@
+[{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb118"
+  },
+  "id": "1",
+  "isAGroup": false,
+  "name": "Rex Barzee",
+  "email": "barzeer@byui.edu",
+  "phone": "208-496-3768",
+  "imageUrl": "../assets/images/barzeer.jpg",
+  "group": [],
+  "__v": 14
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb123"
+  },
+  "id": "16",
+  "isAGroup": false,
+  "name": "Randy Somsen",
+  "email": "somsenr@byui.edu",
+  "phone": "208-496-3776",
+  "imageUrl": "../assets/images/somsenr.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb122"
+  },
+  "id": "15",
+  "isAGroup": false,
+  "name": "Blaine Robertson",
+  "email": "robertsonb@byui.edu",
+  "phone": "208-496-3775",
+  "imageUrl": "../assets/images/robertsonb.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb11b"
+  },
+  "id": "5",
+  "isAGroup": false,
+  "name": "Kory Godfrey",
+  "email": "godfreyko@byui.edu",
+  "phone": "208-496-3770",
+  "imageUrl": "../assets/images/godfreyko.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb119"
+  },
+  "id": "2",
+  "isAGroup": false,
+  "name": "Bradley Armstrong",
+  "email": "armstrongb@byui.edu",
+  "phone": "208-496-3766",
+  "imageUrl": "../assets/images/armstrongb.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb120"
+  },
+  "id": "12",
+  "isAGroup": false,
+  "name": "Mark Olaveson",
+  "email": "olavesonm@byui.edu",
+  "phone": "208-496-3773",
+  "imageUrl": "../assets/images/olavesonm.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb11c"
+  },
+  "id": "7",
+  "isAGroup": false,
+  "name": "R. Kent Jackson",
+  "email": "jacksonk@byui.edu",
+  "phone": "208-496-3771",
+  "imageUrl": "../assets/images/jacksonk.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb121"
+  },
+  "id": "13",
+  "isAGroup": false,
+  "name": "Steven Rigby",
+  "email": "rigbys@byui.edu",
+  "phone": "208-496-3774",
+  "imageUrl": "../assets/images/rigbys.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb124"
+  },
+  "id": "17",
+  "isAGroup": false,
+  "name": "Shane Thompson",
+  "email": "thompsonda@byui.edu",
+  "phone": "208-496-3776",
+  "imageUrl": "../assets/images/thompsonda.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb11a"
+  },
+  "id": "3",
+  "isAGroup": false,
+  "name": "Lee Barney",
+  "email": "barneyl@byui.edu",
+  "phone": "208-496-3767",
+  "imageUrl": "../assets/images/barneyl.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb11f"
+  },
+  "id": "11",
+  "isAGroup": false,
+  "name": "Brent Morring",
+  "email": "morringb@byui.edu",
+  "phone": "208-496-3778",
+  "imageUrl": "../assets/images/morringb.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb11e"
+  },
+  "id": "9",
+  "isAGroup": false,
+  "name": "Michael McLaughlin",
+  "email": "mclaughlinm@byui.edu",
+  "phone": "208-496-3772",
+  "imageUrl": "../assets/images/mclaughlinm.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65f8745231a17870d9deb11d"
+  },
+  "id": "8",
+  "isAGroup": false,
+  "name": "Craig Lindstrom",
+  "email": "lindstromc@byui.edu",
+  "phone": "208-496-3769",
+  "imageUrl": "../assets/images/lindstromc.jpg",
+  "group": null
+},
+{
+  "_id": {
+    "$oid": "65fa05279e08923fa406fdd8"
+  },
+  "id": "103",
+  "isAGroup": false,
+  "name": "Aaron Picker",
+  "email": "atpicker@gmail.com",
+  "phone": "970-980-9529",
+  "imageUrl": "../../assets/images/mexiduck.png",
+  "group": [],
+  "__v": 0
+}]

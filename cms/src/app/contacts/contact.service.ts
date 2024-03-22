@@ -47,12 +47,9 @@ export class ContactService {
     return this.contactsLoaded.asObservable();
   }
 
-  storeContacts(): void {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    this.http.put(this.url, JSON.stringify(this.contacts), { headers: headers })
-      .subscribe(() => {
-        this.contactListChangedEvent.next(this.contacts.slice());
-      });
+  sortAndSend(): void {
+    this.contacts.sort((a, b) => a.name.localeCompare(b.name));
+    this.contactListChangedEvent.next(this.contacts.slice());
   }
 
   getContact(id: string): Contact | null {
@@ -116,8 +113,12 @@ export class ContactService {
         { headers: headers })
         .subscribe(
           (responseData) => {
+            console.log(responseData);
             this.contacts.push(responseData.contact);
-            this.contactListChangedEvent.next(this.contacts.slice());
+            this.sortAndSend();
+          },
+          (error) => {
+            console.error('Error adding contact', error);
           }
         );
     }
@@ -139,7 +140,7 @@ export class ContactService {
       .subscribe(
         (response: Response) => {
           this.contacts[pos] = newContact;
-          this.contactListChangedEvent.next(this.contacts.slice());
+          this.sortAndSend();
         });
     }
   
@@ -157,7 +158,7 @@ export class ContactService {
       .subscribe(
         (response: Response) => {
           this.contacts.splice(pos, 1);
-          this.contactListChangedEvent.next(this.contacts.slice());
+          this.sortAndSend();
         }
       )
       

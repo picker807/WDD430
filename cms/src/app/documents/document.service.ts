@@ -41,12 +41,9 @@ url: string = 'http://localhost:3000/documents';
     );
   }
 
-  storeDocuments(): void {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    this.http.put(this.url, JSON.stringify(this.documents), { headers: headers })
-      .subscribe(() => {
-        this.documentListChangedEvent.next(this.documents.slice());
-      });
+  sortAndSend(): void {
+    this.documents.sort((a, b) => a.name.localeCompare(b.name));
+    this.documentListChangedEvent.next(this.documents.slice());
   }
 
   getDocument(id: string){
@@ -83,7 +80,7 @@ url: string = 'http://localhost:3000/documents';
       .subscribe(
         (responseData) => {
           this.documents.push(responseData.document);
-          this.documentListChangedEvent.next(this.documents.slice());
+          this.sortAndSend();
         }
       );
    
@@ -108,7 +105,7 @@ url: string = 'http://localhost:3000/documents';
       .subscribe(
         (response: Response) => {
           this.documents[pos] = newDocument;
-          this.documentListChangedEvent.next(this.documents.slice());
+          this.sortAndSend();
         });
 
     //this.storeDocuments();
@@ -128,7 +125,7 @@ url: string = 'http://localhost:3000/documents';
       .subscribe(
         (response: Response) => {
           this.documents.splice(pos, 1);
-          this.documentListChangedEvent.next(this.documents.slice());
+          this.sortAndSend();
         }
       );
   }

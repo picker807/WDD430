@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
     group: req.body.group
   });
 
-    const createdCpntact = await contact.save();
+    const createdContact = await contact.save();
     res.status(201).json({
       message: 'Contact added successfully',
       contact: createdContact
