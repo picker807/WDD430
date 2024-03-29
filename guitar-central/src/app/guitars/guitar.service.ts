@@ -9,44 +9,44 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class GuitarService {
 
   guitars: Guitar[] = [];
-  maxGuitarId: number;
   guitarSelectedEvent: EventEmitter<Guitar> = new EventEmitter<Guitar>();
   guitarListChangedEvent = new Subject<Guitar []>();
-  url: string = 'https://guitarcentral-cd585-default-rtdb.firebaseio.com/guitars.json';
+  url: string = 'http://localhost:3000/inventory';
 
-  constructor(private http: HttpClient) { 
-    this.maxGuitarId = this.getMaxId();
-  }
+  constructor(private http: HttpClient) {}
 
   getGuitars(): void{
     this.http.get<Guitar[]>(this.url).subscribe(
       (guitars: Guitar[]) => {
         this.guitars = guitars;
-        this.maxGuitarId = this.getMaxId();
-        this.guitars.sort((a: Guitar, b: Guitar) => {
-          if (a.brand <b.brand) {
-            return -1;
-          } else if (a.brand > b.brand) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-        this.guitarListChangedEvent.next(this.guitars.slice());
+        this.sortAndSend();
       },
       (error: any) => {
         console.error(error);
       }
     );
-
   }
 
-  storeGuitars(): void {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    this.http.put(this.url, JSON.stringify(this.guitars), { headers: headers })
-      .subscribe(() => {
-        this.guitarListChangedEvent.next(this.guitars.slice());
-      });
+  sortAndSend(): void {
+    this.guitars.sort((a: Guitar, b: Guitar) => {
+      // First, compare by brand
+      if (a.brand.toLowerCase() < b.brand.toLowerCase()) {
+        return -1;
+      } else if (a.brand.toLowerCase() > b.brand.toLowerCase()) {
+        return 1;
+      } else {
+        // If brands are equal, then compare by model
+        if (a.model.toLowerCase() < b.model.toLowerCase()) {
+          return -1;
+        } else if (a.model.toLowerCase() > b.model.toLowerCase()) {
+          return 1;
+        } else {
+          // If both brand and model are equal
+          return 0;
+        }
+      }
+    });
+    this.guitarListChangedEvent.next(this.guitars.slice());
   }
 
   getGuitar(id: string): Guitar | null{
@@ -57,29 +57,27 @@ export class GuitarService {
     }
     return null;
   }
-
-  getMaxId(): number {
-    let maxId = 0;
-      this.guitars.forEach(guitar => {
-        const currentId = +guitar.id;
-        if (currentId > maxId) {
-          maxId = currentId;
-        }
-      });
-      return maxId;
-  }
   
     addGuitar(newGuitar: Guitar): void {
       if (newGuitar === undefined || newGuitar === null) {
         return;
       }
   
-      this.maxGuitarId++;
-      newGuitar.id = this.maxGuitarId.toString();
-      this.guitars.push(newGuitar);
+      newGuitar.id = '';
+      const headers = new HttpHeaders({'Content-Type': 'application/json'});
   
-      this.storeGuitars();
-    }
+      this.http.post<{ message: string, guitar: Guitar }>(this.url, newGuitar, { headers: headers })
+      .subscribe({
+        next: (responseData) => {
+          console.log(responseData);
+          this.guitars.push(responseData.guitar);
+          this.sortAndSend();
+        },
+        error: (error) => {
+          console.error('Error adding location', error);
+        }
+      });
+  }
   
     updateGuitar(originalGuitar: Guitar, newGuitar: Guitar): void {
       if (originalGuitar === undefined || originalGuitar === null || newGuitar === undefined || newGuitar === null) {
@@ -92,9 +90,15 @@ export class GuitarService {
       }
   
       newGuitar.id = originalGuitar.id;
-      this.guitars[pos] = newGuitar;
-  
-      this.storeGuitars();
+      const headers = new HttpHeaders({'Content-Type': 'application/json'});
+      // update database
+      this.http.put(this.url + '/' + originalGuitar.id,
+      newGuitar, { headers: headers })
+      .subscribe(
+      (response: Response) => {
+        this.guitars[pos] = newGuitar;
+        this.sortAndSend();
+      });
     }
   
     deleteGuitar(guitar: Guitar): void {
@@ -107,8 +111,14 @@ export class GuitarService {
         return;
       }
   
-      this.guitars.splice(pos, 1);
-      this.storeGuitars();
+      this.http.delete(this.url + '/' + guitar.id)
+      .subscribe(
+        (response: Response) => {
+          this.guitars.splice(pos, 1);
+          this.sortAndSend();
+        }
+      )
+      
     }
 }
 

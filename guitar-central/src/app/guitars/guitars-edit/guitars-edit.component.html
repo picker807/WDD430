@@ -1,1 +1,136 @@
-<p>guitars-edit works!</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" id="contact-edit">
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="brand">Brand:</label>
+          <input
+            name="brand"
+            [(ngModel)]="guitar.brand"
+            #brand="ngModel"
+            type="text"
+            id="brand"
+            class="form-control required"
+            size="120"
+            max="120"
+            required>
+            <div *ngIf="brand.invalid && brand.touched" class="alert alert-danger">
+              Enter a brand
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="model">Model:</label>
+          <input
+            name="model"
+            [(ngModel)]="guitar.model"
+            #model="ngModel"
+            type="text"
+            id="model"
+            class="form-control required"
+            size="120"
+            max="120"
+            required>
+            <div *ngIf="model.invalid && model.touched" class="alert alert-danger">
+              Enter a model
+            </div>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="year">Year:</label>
+            <input
+              name="year"
+              [ngModel]="guitar.year"
+              #year="ngModel"
+              type="text"
+              id="year"
+              class="form-control required"
+              size="120"
+              max="255"
+              required
+              pattern="^\d{4}$">
+              <div *ngIf="year.invalid && year.touched" class="alert alert-danger">
+                Enter a valid year
+              </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="price">Price:</label>
+            <input
+              name="price"
+              [ngModel]="guitar.price"
+              #price="ngModel"
+              type="text"
+              id="price"
+              class="form-control invalid"
+              size="150"
+              max="255">
+          </div>
+          <div class="col-sm-12 form-group">
+            <label for="description">Description:</label>
+            <input
+              name="description"
+              [ngModel]="guitar.description"
+              #description="ngModel"
+              type="text"
+              id="description"
+              class="form-control"
+              size="150"
+              max="255">
+          </div>
+          <div class="col-sm-12 form-group">
+            <label for="category">Category:</label>
+            <input
+              name="category"
+              [ngModel]="guitar.category"
+              #category="ngModel"
+              type="text"
+              id="category"
+              class="form-control"
+              size="150"
+              max="255">
+          </div>
+          <div class="col-sm-12 form-group">
+            <label for="condition">Condition:</label>
+            <input
+              name="condition"
+              [ngModel]="guitar.condition"
+              #condition="ngModel"
+              type="text"
+              id="condition"
+              class="form-control"
+              size="150"
+              max="255">
+          </div>
+        </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="imageUrl">Image URL:</label>
+          <input
+            name="imageUrl"
+            [ngModel]="guitar.image"
+            #image="ngModel"
+            type="text"
+            id="imageUrl"
+            class="form-control"
+            size="150"
+            max="255">
+        </div>
+      </div>
+
+      <!-- Save and Cancel Buttons -->
+      <div class="row">
+        <div class="col-xs-12 btn-toolbar">
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">Save</button>
+          <button class ="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

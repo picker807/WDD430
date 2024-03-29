@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="container-fluid">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+            <h2 class="list-group-item-heading ">Locations</h2>
+          </div>
+          <div class="row">
+            <div class="input-group pull-left pad-left-right col-xs-7">
+                  <select [(ngModel)]="selectedState">
+                    <option value="">Select a State</option>
+                    <option *ngFor="let state of uniqueStates" [value]="state">{{state}}</option>
+                  </select>
+                  
+                <button type="button" class="btn btn-success pull-right pad-right-10" [routerLink]="['new']" >New Location</button>
+                <div class="clearfix"></div>
+
+            </div >
+            </div>
+                <div>
+                <div 
+                *ngFor="let location of locations | locationFilter:selectedState">
+                  <gc-location-item [location]="location"  ></gc-location-item>
+                </div>
+              </div>
+          </div>
+          </div>
+        </div>
+    </div>
+  </div>
+

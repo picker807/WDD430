@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-xs-6">
+        <h3>{{ location?.storeName || "Store Name Here" }}</h3>
+      </div>
+      <div class="col-xs-6 text-right">
+        <a type="button" class="btn btn-primary" [routerLink]="['edit']" >Edit</a>
+        <a type="button" class="btn btn-danger" [routerLink]="[location.id]" (click)="onDelete()">Delete</a>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <p><strong>Address:</strong> {{ location?.address || "No Address" }}</p>
+    <p><strong>City:</strong> {{ location?.city || "No City" }}</p>
+    <p><strong>State:</strong> {{ location?.state || "No State" }}</p>
+    <p><strong>Zip Code:</strong> {{ location?.zipCode || "No Zip Code" }}</p>
+
+    <!-- Inventory Section -->
+    <h4>Inventory:</h4>
+    <div *ngIf="location?.inventory && location.inventory.length > 0">
+      <div class="inventory-list">
+        <div *ngFor="let guitar of location.inventory">
+          <gc-guitar-item [guitar]="guitar"></gc-guitar-item>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!(location.inventory && location.inventory.length > 0)">
+      <p>No inventory available.</p>
+    </div>
+  </div>
+</div>

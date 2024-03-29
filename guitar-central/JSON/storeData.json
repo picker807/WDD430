@@ -5,7 +5,8 @@
     "address": "123 Broadway",
     "city": "New York",
     "state": "NY",
-    "zipCode": "10006"
+    "zipCode": "10006",
+    "inventory": []
   },
   {
     "id": "2",
@@ -13,7 +14,8 @@
     "address": "456 Sunset Blvd",
     "city": "Los Angeles",
     "state": "CA",
-    "zipCode": "90028"
+    "zipCode": "90028",
+    "inventory": []
   },
   {
     "id": "3",
@@ -21,7 +23,8 @@
     "address": "789 W Madison St",
     "city": "Chicago",
     "state": "IL",
-    "zipCode": "60661"
+    "zipCode": "60661",
+    "inventory": []
   },
   {
     "id": "4",
@@ -29,7 +32,8 @@
     "address": "1011 Westheimer Rd",
     "city": "Houston",
     "state": "TX",
-    "zipCode": "77006"
+    "zipCode": "77006",
+    "inventory": []
   },
   {
     "id": "5",
@@ -37,7 +41,8 @@
     "address": "1213 N Central Ave",
     "city": "Phoenix",
     "state": "AZ",
-    "zipCode": "85004"
+    "zipCode": "85004" ,
+    "inventory": []
   },
   {
     "id": "6",
@@ -45,7 +50,8 @@
     "address": "1415 Market St",
     "city": "Philadelphia",
     "state": "PA",
-    "zipCode": "19102"
+    "zipCode": "19102",
+    "inventory": []
   },
   {
     "id": "7",
@@ -53,7 +59,8 @@
     "address": "330 Montana St",
     "city": "San Antonio",
     "state": "TX",
-    "zipCode": "78215"
+    "zipCode": "78215",
+    "inventory": []
   },
   {
     "id": "8",
@@ -61,7 +68,8 @@
     "address": "1819 India St",
     "city": "San Diego",
     "state": "CA",
-    "zipCode": "92101"
+    "zipCode": "92101",
+    "inventory": []
   },
   {
     "id": "9",
@@ -69,7 +77,8 @@
     "address": "2021 Elm St",
     "city": "Dallas",
     "state": "TX",
-    "zipCode": "75201"
+    "zipCode": "75201",
+    "inventory": []
   },
   {
     "id": "10",
@@ -77,7 +86,8 @@
     "address": "2223 Main St",
     "city": "Jacksonville",
     "state": "FL",
-    "zipCode": "32206"
+    "zipCode": "32206",
+    "inventory": []
   },
   {
     "id": "11",
@@ -85,7 +95,8 @@
     "address": "2425 Market St",
     "city": "San Francisco",
     "state": "CA",
-    "zipCode": "94114"
+    "zipCode": "94114",
+    "inventory": []
   },
   {
     "id": "12",
@@ -93,7 +104,8 @@
     "address": "2627 EW 86th St",
     "city": "Indianapolis",
     "state": "IN",
-    "zipCode": "46240"
+    "zipCode": "46240",
+    "inventory": []
   },
   {
     "id": "13",
@@ -101,7 +113,8 @@
     "address": "2829 N High St",
     "city": "Columbus",
     "state": "OH",
-    "zipCode": "43202"
+    "zipCode": "43202",
+    "inventory": []
   },
   {
     "id": "14",
@@ -109,7 +122,8 @@
     "address": "3031 South Blvd",
     "city": "Charlotte",
     "state": "NC",
-    "zipCode": "28209"
+    "zipCode": "28209",
+    "inventory": []
   },
   {
     "id": "15",
@@ -117,6 +131,7 @@
     "address": "3233 1st Ave",
     "city": "Seattle",
     "state": "WA",
-    "zipCode": "98121"
+    "zipCode": "98121",
+    "inventory": []
   }
 ]

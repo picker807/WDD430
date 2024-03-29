@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Guitar } from '../guitar.model';
 import { GuitarService } from '../guitar.service';
 import { Subscription } from 'rxjs';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'gc-guitars-list',
   templateUrl: './guitars-list.component.html',
   styleUrl: './guitars-list.component.css'
 })
-export class GuitarsListComponent {
+export class GuitarsListComponent implements OnInit, OnDestroy {
   guitars: Guitar[] = [];
   subscription: Subscription;
   term: string;

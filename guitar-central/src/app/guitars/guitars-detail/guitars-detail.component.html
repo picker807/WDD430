@@ -1,1 +1,20 @@
-<p>guitars-detail works!</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-xs-6">
+        <h3>{{ guitar.brand || "Brand" }}</h3>
+        <h5>{{guitar.model}}</h5>
+        <img class="img-responsive" [src]="guitar.image || 'assets/images/mexiduck.png'" alt="{{ guitar.brand }} Image"/>
+      </div>
+      <div class="col-xs-6 text-right">
+        <a type="button" class="btn btn-primary" [routerLink]="['edit']" >Edit</a>
+        <a type="button" class="btn btn-danger" [routerLink]="[guitar.id]" (click)="onDelete()">Delete</a>
+      </div>
+    </div>
+  </div>
+    <p><strong>Year:</strong> {{ guitar.year }}</p>
+    <p><strong>Price:</strong> {{ guitar.price }}</p>
+    <p><strong>Description:</strong> {{ guitar.description }}</p>
+    <p><strong>Category:</strong> {{ guitar.category }}</p>
+    <p><strong>Condition:</strong> {{ guitar.condition }}</p>
+  </div>
