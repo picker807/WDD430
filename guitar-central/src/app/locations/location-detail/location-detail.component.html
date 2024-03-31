@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default location-detail">
   <div class="panel-heading">
     <div class="row">
       <div class="col-xs-6">
@@ -15,9 +15,10 @@
     <p><strong>City:</strong> {{ location?.city || "No City" }}</p>
     <p><strong>State:</strong> {{ location?.state || "No State" }}</p>
     <p><strong>Zip Code:</strong> {{ location?.zipCode || "No Zip Code" }}</p>
+    <p></p>
 
     <!-- Inventory Section -->
-    <h4>Inventory:</h4>
+    <h2>Inventory:</h2>
     <div *ngIf="location?.inventory && location.inventory.length > 0">
       <div class="inventory-list">
         <div *ngFor="let guitar of location.inventory">

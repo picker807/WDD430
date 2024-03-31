@@ -1,10 +1,12 @@
-<div class="panel panel-default">
+<div class="guitar-detail panel panel-default">
   <div class="panel-heading">
     <div class="row">
-      <div class="col-xs-6">
+      <div>
         <h3>{{ guitar.brand || "Brand" }}</h3>
-        <h5>{{guitar.model}}</h5>
-        <img class="img-responsive" [src]="guitar.image || 'assets/images/mexiduck.png'" alt="{{ guitar.brand }} Image"/>
+        <h4>{{guitar.model}}</h4>
+        <div class="guitar-image-container">
+        <img class="guitar-image-large" [src]="guitar.image || 'assets/images/mexiduck.png'" alt="{{ guitar.brand }} Image"/>
+      </div>
       </div>
       <div class="col-xs-6 text-right">
         <a type="button" class="btn btn-primary" [routerLink]="['edit']" >Edit</a>

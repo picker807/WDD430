@@ -9,3 +9,9 @@ gc-header {
 .container {
   padding-top: 75px;
 }
+
+.custom-flex-container {
+  display: flex;
+  flex-direction: row; 
+  width: 100%;
+}

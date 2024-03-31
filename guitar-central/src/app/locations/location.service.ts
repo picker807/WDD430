@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Location } from './location.model';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -60,15 +61,16 @@ export class LocationService {
     return null;
   }
   
-  addLocation(newLocation: Location): void {
+  addLocation(newLocation: Location): Observable<any> {
     if (newLocation === undefined || newLocation === null) {
       return;
     }
     newLocation.id = '';
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
   
-    this.http.post<{ message: string, location: Location }>(this.url, newLocation, { headers: headers })
-      .subscribe({
+    return this.http.post<{ message: string, location: Location }>(this.url, newLocation, { headers: headers })
+    .pipe(
+      tap({
         next: (responseData) => {
           console.log(responseData);
           this.locations.push(responseData.location);
@@ -77,10 +79,11 @@ export class LocationService {
         error: (error) => {
           console.error('Error adding location', error);
         }
-      });
+      })
+    );
   }
   
-  updateLocation(originalLocation: Location, newLocation: Location): void {
+  updateLocation(originalLocation: Location, newLocation: Location): Observable<any> {
     if (originalLocation === undefined || originalLocation === null || newLocation === undefined || newLocation === null) {
       return;
     }
@@ -92,13 +95,15 @@ export class LocationService {
     newLocation.id = originalLocation.id;
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     // update database
-    this.http.put(this.url + '/' + originalLocation.id,
+    return this.http.put(this.url + '/' + originalLocation.id,
     newLocation, { headers: headers })
-    .subscribe(
-      (response: Response) => {
-        this.locations[pos] = newLocation;
-        this.sortAndSend();
-      });
+    .pipe(
+      tap({
+        next: (response: Response) => {
+          this.locations[pos] = newLocation;
+          this.sortAndSend();
+      }
+      }));
     }
   
     deleteLocation(location: Location): void {

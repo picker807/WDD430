@@ -1,1 +1,162 @@
 /* You can add global styles to this file, and also import other style files */
+/* Custom Header Styles */
+
+.navbar {
+  min-height: 100px;
+}
+
+.navbar-basic {
+  background: url('/assets/images/gretsch-bg.jpg') center center;
+  background-size: cover;
+  color: #0f0404;
+}
+
+.navbar-basic .navbar-brand {
+  color: #00A86B;
+  font-size: 36px;
+  padding-right: 100px;
+}
+
+.navbar-basic .nav > li > a,
+.navbar-basic .nav > li {
+  background-color: #6b6d6b;
+  color: #f0f8f0;
+  font-size: 24px;
+  padding-right: 50px;
+  border-radius: 4px; /* Slightly rounded corners */
+  margin: 5px; /* Margin around the links */
+  padding: 10px 15px; /* Padding inside the links */
+}
+
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus,
+.active-link {
+  background-color: #228B22; /* Darker shade of green on hover/focus */
+  color: #fff; /* White text color maintained */
+}
+
+.active {
+  background-color: #c8f7ca; /* Change the background color to your preference */
+  color: rgb(58, 141, 230); /* Change the text color to your preference */
+  /* Add any other styles you want for your active link */
+}
+
+/* Custom Inventory page style */
+.custom-flex-container {
+  display: flex;
+  flex-direction: row;
+  height: 90vh; /* Use viewport height to make the container fill the screen */
+  width: 90vw;
+  padding-top: 30px;
+}
+
+.guitar-list-container {
+  flex: 1;
+  flex-direction: row; /* Align items horizontally */
+  flex-wrap: wrap; /* Allow items to wrap to next line */
+  border: 2px solid #000000; /* Visible border around the container */
+  height: 70vh;
+  overflow-y: auto;
+  /* Other styles for the container */
+}
+
+.router-outlet-container {
+  flex-grow: 1;
+  padding-top: 3vw;
+}
+
+
+.inventory-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 2vw;
+  
+}
+
+.inventory-header {
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.search-container {
+  display: flex;
+  padding: 5px;
+}
+
+.search-icon {
+  cursor: pointer;
+  /* Add your search icon background or styles here */
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+  /* Add more button styling here */
+}
+
+.image-container {
+  width: 250px; 
+  height: 180px; 
+  overflow: hidden;
+  position: relative; 
+}
+
+.image-container img {
+  width: 100%; 
+  height: auto; 
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+}
+
+.guitar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px; /* Space between items */
+  text-decoration: none; /* Remove underline from links */
+  flex: 1 1 calc(33.333% - 10px); 
+}
+
+.guitar-info {
+  flex: 1; /* Allows text section to fill available space */
+}
+
+.guitar-brand, .guitar-model {
+  margin: 0; /* Remove default margins */
+}
+
+.guitar-image-container {
+  flex-shrink: 0; /* Prevents the image container from shrinking */
+  padding-left: 10px; /* Space between text and image */
+}
+
+.guitar-image-container img {
+  height: 100px; /* Limit image size */
+  width: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image covers the area */
+}
+
+.guitar-image-large{
+height: 40vh !important;
+width: auto !important;
+object-fit: cover;
+}
+
+.guitar-detail,
+.guitar-edit {
+  max-width: 50vw; /* Limits the width of the guitar detail component */
+  padding: 100px; /* Adds padding at the top to prevent hiding behind the header */
+  overflow: auto; /* Ensures content within the component is scrollable if it exceeds the max width */
+}
+
+.guitar-detail p,
+.location-detail p {
+  font-size: 20px;
+}
+

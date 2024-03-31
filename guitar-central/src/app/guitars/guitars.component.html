@@ -1,7 +1,9 @@
-<div class="col-md-5 panel-body">
-    <gc-guitars-list></gc-guitars-list>
+<div class="custom-flex-container">
+  <div>
+    <gc-guitars-list [isInventory]="true"></gc-guitars-list>
   </div>
-  <div class="col-md-4 router-outlet">
+  <div class="router-outlet-container">
     <router-outlet></router-outlet>
   </div>
+</div>
 

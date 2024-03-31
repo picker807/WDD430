@@ -1,11 +1,9 @@
-<a href="#" class="list-group-item clearfix" routerLinkActive="active" [routerLink]="[guitar.id]">
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{ guitar.brand }}</h4>
-    <h5>{{guitar.model}}</h5>
+<a href="#" class="guitar-item" routerLinkActive="active" [routerLink]="[guitar.id]">
+  <div class="guitar-info">
+    <h4 class="guitar-brand">{{ guitar.brand }}</h4>
+    <h5 class="guitar-model">{{guitar.model}}</h5>
   </div>
-  <span class="pull-right">
-    <div class="image-container">
-    <img class="img-responsive" src="{{guitar.image}}" alt="{{ guitar.model }} Image">
+  <div class="guitar-image-container">
+    <img src="{{guitar.image}}" alt="{{ guitar.model }} Image">
   </div>
-  </span>
-  </a>
+</a>

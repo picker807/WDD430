@@ -64,7 +64,7 @@ export class LocationEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/locations']);
+    this.router.navigate(['/locations', this.originalLocation.id]);
   }
 
   onSubmit(form: NgForm) {
@@ -80,12 +80,20 @@ export class LocationEditComponent implements OnInit {
     };
 
     if (this.editMode) {
-      this.locationService.updateLocation(this.originalLocation, newLocation);
+      this.locationService.updateLocation(this.originalLocation, newLocation)
+      .subscribe((response => {
+        this.router.navigate(['/locations', this.originalLocation.id]);
+      }));
     } else {
-      this.locationService.addLocation(newLocation);
+      this.locationService.addLocation(newLocation).subscribe(
+        (response) => {
+          const newId = response.location.id;
+          this.router.navigate(['/locations', newId]);
+        }
+      );
     }
 
-    this.router.navigate(['/locations']);
+    
   }
 
   onRemoveItem(index: number) {

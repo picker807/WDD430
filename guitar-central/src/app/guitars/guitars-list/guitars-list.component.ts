@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Guitar } from '../guitar.model';
 import { GuitarService } from '../guitar.service';
 import { Subscription } from 'rxjs';
@@ -10,6 +10,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
   styleUrl: './guitars-list.component.css'
 })
 export class GuitarsListComponent implements OnInit, OnDestroy {
+  @Input() isInventory: Boolean = true; //Used to change styling depending on where the list is used.
   guitars: Guitar[] = [];
   subscription: Subscription;
   term: string;
