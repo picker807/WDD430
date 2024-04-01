@@ -52,7 +52,7 @@ export class GuitarsEditComponent implements OnInit{
     }
 
     onCancel(){
-      this.router.navigate(['/inventory']);
+      this.router.navigate(['/inventory', this.originalGuitar.id]);
     }
 
     onSubmit(form: NgForm){
@@ -70,11 +70,16 @@ export class GuitarsEditComponent implements OnInit{
       );
   
       if (this.editMode) {
-        this.guitarService.updateGuitar(this.originalGuitar, newGuitar);
+        this.guitarService.updateGuitar(this.originalGuitar, newGuitar)
+        .subscribe((response => {
+          this.router.navigate(['/inventory', this.originalGuitar.id]);
+        }))
       } else {
-        this.guitarService.addGuitar(newGuitar);
+        this.guitarService.addGuitar(newGuitar)
+        .subscribe((response) => {
+          const newId = response.guitar.id;
+          this.router.navigate(['/inventory', newId]);
+        });
       }
-  
-      this.router.navigate(['/inventory']);
     }
 }

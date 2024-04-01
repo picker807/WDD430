@@ -1,7 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Guitar } from './guitar.model';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,7 @@ export class GuitarService {
     return null;
   }
   
-    addGuitar(newGuitar: Guitar): void {
+    addGuitar(newGuitar: Guitar): Observable<any> {
       if (newGuitar === undefined || newGuitar === null) {
         return;
       }
@@ -66,8 +67,9 @@ export class GuitarService {
       newGuitar.id = '';
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
   
-      this.http.post<{ message: string, guitar: Guitar }>(this.url, newGuitar, { headers: headers })
-      .subscribe({
+      return this.http.post<{ message: string, guitar: Guitar }>(this.url, newGuitar, { headers: headers })
+      .pipe(
+        tap({
         next: (responseData) => {
           console.log(responseData);
           this.guitars.push(responseData.guitar);
@@ -76,10 +78,11 @@ export class GuitarService {
         error: (error) => {
           console.error('Error adding location', error);
         }
-      });
+      })
+      )
   }
   
-    updateGuitar(originalGuitar: Guitar, newGuitar: Guitar): void {
+    updateGuitar(originalGuitar: Guitar, newGuitar: Guitar): Observable<any> {
       if (originalGuitar === undefined || originalGuitar === null || newGuitar === undefined || newGuitar === null) {
         return;
       }
@@ -92,13 +95,15 @@ export class GuitarService {
       newGuitar.id = originalGuitar.id;
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
       // update database
-      this.http.put(this.url + '/' + originalGuitar.id,
+      return this.http.put(this.url + '/' + originalGuitar.id,
       newGuitar, { headers: headers })
-      .subscribe(
-      (response: Response) => {
-        this.guitars[pos] = newGuitar;
-        this.sortAndSend();
-      });
+      .pipe(
+        tap({
+          next: (response: Response) => {
+              this.guitars[pos] = newGuitar;
+              this.sortAndSend();
+           }
+      }));
     }
   
     deleteGuitar(guitar: Guitar): void {

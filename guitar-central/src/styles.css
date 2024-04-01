@@ -23,41 +23,39 @@
   color: #f0f8f0;
   font-size: 24px;
   padding-right: 50px;
-  border-radius: 4px; /* Slightly rounded corners */
-  margin: 5px; /* Margin around the links */
-  padding: 10px 15px; /* Padding inside the links */
+  border-radius: 4px;
+  margin: 5px; 
+  padding: 10px 15px; 
 }
 
 .navbar-nav > li > a:hover,
 .navbar-nav > li > a:focus,
 .active-link {
-  background-color: #228B22; /* Darker shade of green on hover/focus */
-  color: #fff; /* White text color maintained */
+  background-color: #228B22; 
+  color: #fff;
 }
 
 .active {
-  background-color: #c8f7ca; /* Change the background color to your preference */
-  color: rgb(58, 141, 230); /* Change the text color to your preference */
-  /* Add any other styles you want for your active link */
+  background-color: #c8f7ca;
+  color: rgb(58, 141, 230); 
 }
 
 /* Custom Inventory page style */
 .custom-flex-container {
   display: flex;
   flex-direction: row;
-  height: 90vh; /* Use viewport height to make the container fill the screen */
+  height: 90vh; 
   width: 90vw;
   padding-top: 30px;
 }
 
 .guitar-list-container {
   flex: 1;
-  flex-direction: row; /* Align items horizontally */
-  flex-wrap: wrap; /* Allow items to wrap to next line */
-  border: 2px solid #000000; /* Visible border around the container */
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 2px solid #000000;
   height: 70vh;
   overflow-y: auto;
-  /* Other styles for the container */
 }
 
 .router-outlet-container {
@@ -88,13 +86,11 @@
 
 .search-icon {
   cursor: pointer;
-  /* Add your search icon background or styles here */
 }
 
 button {
   padding: 5px 10px;
   cursor: pointer;
-  /* Add more button styling here */
 }
 
 .image-container {
@@ -118,28 +114,28 @@ button {
   align-items: center;
   padding: 50px;
   border: 1px solid #ccc;
-  margin-bottom: 10px; /* Space between items */
-  text-decoration: none; /* Remove underline from links */
+  margin-bottom: 10px;
+  text-decoration: none;
   flex: 1 1 calc(33.333% - 10px); 
 }
 
 .guitar-info {
-  flex: 1; /* Allows text section to fill available space */
+  flex: 1;
 }
 
 .guitar-brand, .guitar-model {
-  margin: 0; /* Remove default margins */
+  margin: 0;
 }
 
 .guitar-image-container {
-  flex-shrink: 0; /* Prevents the image container from shrinking */
-  padding-left: 10px; /* Space between text and image */
+  flex-shrink: 0;
+  padding-left: 10px; 
 }
 
 .guitar-image-container img {
-  height: 100px; /* Limit image size */
-  width: auto; /* Maintain aspect ratio */
-  object-fit: cover; /* Ensure the image covers the area */
+  height: 100px; 
+  width: auto; 
+  object-fit: cover;
 }
 
 .guitar-image-large{
@@ -150,9 +146,9 @@ object-fit: cover;
 
 .guitar-detail,
 .guitar-edit {
-  max-width: 50vw; /* Limits the width of the guitar detail component */
-  padding: 100px; /* Adds padding at the top to prevent hiding behind the header */
-  overflow: auto; /* Ensures content within the component is scrollable if it exceeds the max width */
+  max-width: 50vw; 
+  padding: 100px; 
+  overflow: auto;
 }
 
 .guitar-detail p,

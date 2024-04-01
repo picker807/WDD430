@@ -102,7 +102,7 @@ export class LocationService {
         next: (response: Response) => {
           this.locations[pos] = newLocation;
           this.sortAndSend();
-      }
+        }
       }));
     }
   
